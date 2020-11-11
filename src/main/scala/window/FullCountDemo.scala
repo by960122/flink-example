@@ -6,6 +6,7 @@ import org.apache.flink.streaming.api.scala.function.ProcessWindowFunction;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
+import org.apache.flink.api.scala._;
 
 /**
  * Author:BYDylan
@@ -14,14 +15,14 @@ import org.apache.flink.util.Collector;
  */
 object FullCountDemo {
   def main(args: Array[String]): Unit = {
-    val port = 9001;
+    val port = 8888;
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment;
-    val text = env.socketTextStream("127.0.0.1", port, '\n');
-    import org.apache.flink.api.scala._;
+    val text: DataStream[String] = env.socketTextStream("127.0.0.1", port, '\n');
+
     val windowCount: DataStream[String] = text.flatMap(l => l.split("\\s"))
       .map((_, 1))
       .keyBy(0)
-      .timeWindow(Time.seconds(5))
+      .timeWindow(Time.seconds(3))
       .process(new ProcessWindowFunction[Tuple2[String, Int], String, Tuple, TimeWindow] {
         @scala.throws[Exception]
         override def process(key: Tuple, context: Context, elements: Iterable[(String, Int)], out: Collector[String]) = {
@@ -34,6 +35,6 @@ object FullCountDemo {
         }
       });
     windowCount.print().setParallelism(1);
-    env.execute("Socket window count scala");
+    env.execute("SocketWindowCount");
   }
 }

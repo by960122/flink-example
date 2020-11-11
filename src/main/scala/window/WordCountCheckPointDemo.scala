@@ -6,6 +6,7 @@ import org.apache.flink.streaming.api.CheckpointingMode;
 import org.apache.flink.streaming.api.environment.CheckpointConfig.ExternalizedCheckpointCleanup;
 import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment};
 import org.apache.flink.streaming.api.windowing.time.Time;
+import org.apache.flink.api.scala._;
 
 /**
  * Author:BYDylan
@@ -18,9 +19,9 @@ object WordCountCheckPointDemo {
       ParameterTool.fromArgs(args).getInt("port")
     catch {
       case e: Exception => {
-        System.err.println("No Port set,use default 9000")
+        System.err.println("No Port set,use default 8888")
       }
-        9000;
+        8888;
     }
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment;
     //    设置checkpoint相关配置
@@ -41,13 +42,10 @@ object WordCountCheckPointDemo {
     //    设置statebackend
     //    env.setStateBackend(new MemoryStateBackend());
     //    env.setStateBackend(new FsStateBackend("hdfs://127.0.0.1:9000/flink/checkpoint"));
-    env.setStateBackend(new RocksDBStateBackend("hdfs://127.0.0.1:9000/flink/checkpoint", true));
+    env.setStateBackend(new RocksDBStateBackend("hdfs://127.0.0.1:8888/flink/checkpoint", true));
 
     //    指定数据源(socket)
     val text: DataStream[String] = env.socketTextStream("127.0.0.1", port, '\n');
-
-    //    注意:在这里必须要添加一行隐式转换代码,否则flatmap会报错
-    import org.apache.flink.api.scala._;
 
     val windowCount: DataStream[WordWithCount] = text.flatMap(l => l.split("\\s"))
       .map(w => WordWithCount(w, 1))
@@ -57,7 +55,7 @@ object WordCountCheckPointDemo {
     //.reduce((a,b)=>WordWithCount(a.word,a.count+b.count));
 
     windowCount.print().setParallelism(1);
-    env.execute("Socket window count scala");
+    env.execute("SocketWindowCount");
   }
 
   case class WordWithCount(word: String, count: Long);
