@@ -2,6 +2,7 @@ package operator
 
 import org.apache.flink.streaming.api.scala.{ConnectedStreams, DataStream, StreamExecutionEnvironment};
 import source.custorm.NoParalleSource;
+import org.apache.flink.api.scala._;
 
 /**
  * Author:BYDylan
@@ -11,7 +12,6 @@ import source.custorm.NoParalleSource;
 object ConnectDemo {
   def main(args: Array[String]): Unit = {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment;
-    import org.apache.flink.api.scala._;
     val text1: DataStream[Long] = env.addSource(new NoParalleSource);
     val text2: DataStream[Long] = env.addSource(new NoParalleSource);
     val text2_str: DataStream[String] = text2.map("str" + _);

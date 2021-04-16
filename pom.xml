@@ -11,9 +11,9 @@
         <flink.version>1.12.1</flink.version>
         <kafka.version>2.4.1</kafka.version>
         <scala.version>2.12</scala.version>
-        <sl4j.version>2.0.0-alpha1</sl4j.version>
-        <log4j.version>1.2.17</log4j.version>
         <mysql.version>8.0.21</mysql.version>
+        <log4j.version>2.14.1</log4j.version>
+        <slf4j.version>1.7.30</slf4j.version>
         <fastjson.version>1.2.76</fastjson.version>
     </properties>
     <dependencies>
@@ -144,6 +144,12 @@
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-connector-elasticsearch7_${scala.version}</artifactId>
             <version>${flink.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>log4j-api</artifactId>
+                    <groupId>org.apache.logging.log4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
@@ -161,20 +167,54 @@
             </exclusions>
         </dependency>
         <!--        log4j-->
+<!--        <dependency>-->
+<!--            <groupId>org.slf4j</groupId>-->
+<!--            <artifactId>slf4j-api</artifactId>-->
+<!--            <version>${sl4j.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.slf4j</groupId>-->
+<!--            <artifactId>slf4j-log4j12</artifactId>-->
+<!--            <version>${sl4j.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>log4j</groupId>-->
+<!--            <artifactId>log4j</artifactId>-->
+<!--            <version>${log4j.version}</version>-->
+<!--        </dependency>-->
+        <!--        log4j2-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${sl4j.version}</version>
+            <version>${slf4j.version}</version>
         </dependency>
+        <!-- Bridge log4j to log4j2 -->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${sl4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-1.2-api</artifactId>
             <version>${log4j.version}</version>
+        </dependency>
+        <!-- Bridge slf4j to log4j2 -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
     <build>
