@@ -1,7 +1,7 @@
 package source.custorm
 
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
-import source.SourceDemo.SensorReading;
+import source.SensorReading;
 
 import scala.util.Random;
 
@@ -32,7 +32,7 @@ class SensorSource extends SourceFunction[SensorReading] {
       //      获取当前时间戳,加入到数据中,调用ctx.collect发出数据
       val curTime: Long = System.currentTimeMillis();
       curTemp.foreach(
-        data => ctx.collect(SensorReading(data._1, curTime, data._2))
+        data => ctx.collect(new SensorReading(data._1, curTime, data._2))
       );
       //      间隔500ms
       Thread.sleep(500);

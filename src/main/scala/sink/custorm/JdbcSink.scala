@@ -1,7 +1,7 @@
 package sink.custorm
 
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
-import source.SourceDemo.SensorReading;
+import source.SensorReading;
 import java.sql.{Connection, DriverManager, PreparedStatement};
 import org.apache.flink.configuration.Configuration;
 

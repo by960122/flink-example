@@ -1,10 +1,12 @@
 package application
 
-import java.io.File;
+import java.io.File
+import operator.custorm.SensorReadingReduce
+import org.apache.flink.streaming.api.functions.ProcessFunction
+import org.apache.flink.streaming.api.scala._
+import org.apache.flink.util.Collector
+import source.SensorReading;
 
-import operator.custorm.SensorReadingReduce;
-import org.apache.flink.streaming.api.scala._;
-import source.SourceDemo.SensorReading;
 
 /**
  * Author:BYDylan
@@ -25,7 +27,7 @@ object TransformDemo {
     // 1.先转换成样例类类型（简单转换操作）
     val dataStream: DataStream[SensorReading] = fileStream.map(data => {
       val arr = data.split(",");
-      SensorReading(arr(0), arr(1).toLong, arr(2).toDouble);
+      new SensorReading(arr(0), arr(1).toLong, arr(2).toDouble);
     })
     //      .filter(new MyFilter);
 
@@ -46,17 +48,28 @@ object TransformDemo {
 
     // 4. 多流转换操作
     // 4.1 分流,将传感器温度数据分成低温、高温两条流
-    val splitStream = dataStream
-      .split(data => {
-        if (data.temperature > 30.0) Seq("high") else Seq("low")
-      })
-    val highTempStream: DataStream[SensorReading] = splitStream.select("high");
-    val lowTempStream: DataStream[SensorReading] = splitStream.select("low");
-    val allTempStream: DataStream[SensorReading] = splitStream.select("high", "low");
+    //    flink 1.12 没得了
+    //    val splitStream = dataStream
+    //      .split(data => {
+    //        if (data.temperature > 30.0) Seq("high") else Seq("low")
+    //      })
+    //    val highTempStream: DataStream[SensorReading] = splitStream.select("high");
+    //    val lowTempStream: DataStream[SensorReading] = splitStream.select("low");
+    //    val allTempStream: DataStream[SensorReading] = splitStream.select("high", "low");
+
+    val highTag: OutputTag[SensorReading] = new OutputTag[SensorReading]("high");
+    val lowTag: OutputTag[SensorReading] = new OutputTag[SensorReading]("low");
+    val splitStream: DataStream[SensorReading] = dataStream.process(new ProcessFunction[SensorReading, SensorReading] {
+      override def processElement(data: SensorReading, context: ProcessFunction[SensorReading, SensorReading]#Context, collector: Collector[SensorReading]): Unit = {
+        if (data.temperature > 30.0) context.output(highTag, data);
+        else context.output(lowTag, data);
+      }
+    });
+    val highTempStream: DataStream[SensorReading] = splitStream.getSideOutput(highTag);
+    val lowTempStream: DataStream[SensorReading] = splitStream.getSideOutput(lowTag);
 
     //    highTempStream.print("high")
     //    lowTempStream.print("low")
-    //    allTempStream.print("all")
 
     // 4.2 合流,connect
     val warningStream: DataStream[(String, Double)] = highTempStream.map(data => (data.id, data.temperature));
@@ -69,7 +82,7 @@ object TransformDemo {
     );
 
     // 4.3 union合流
-    val unionStream: DataStream[SensorReading] = highTempStream.union(lowTempStream, allTempStream);
+    val unionStream: DataStream[SensorReading] = highTempStream.union(lowTempStream);
     coMapResultStream.print("coMap");
     env.execute("TransformDemo");
   }

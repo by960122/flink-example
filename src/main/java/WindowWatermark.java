@@ -1,7 +1,7 @@
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.api.common.typeinfo.Types;
 import org.apache.flink.api.java.tuple.Tuple2;
-import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.windowing.WindowFunction;
@@ -22,9 +22,10 @@ import java.util.List;
  */
 public class WindowWatermark {
     public static void main(String[] args) throws Exception {
-        int port = 9001;
+        int port = 8888;
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-        env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
+//        Flink 1.12 中,默认的时间属性改变成 EventTime 了
+        //        env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
         env.setParallelism(1);
 //        连接 socket 获取输入的数据
         DataStream<String> text = env.socketTextStream("127.0.0.1", port, "\n");
@@ -32,7 +33,7 @@ public class WindowWatermark {
         DataStream<Tuple2<String, Long>> inputMap = text.map((MapFunction<String, Tuple2<String, Long>>) value -> {
             String[] arr = value.split(",");
             return new Tuple2<>(arr[0], Long.parseLong(arr[1]));
-        });
+        }).returns(Types.TUPLE(Types.STRING, Types.LONG));
 //        过期了
 //        抽取 timestamp 和生成 watermark
 //        DataStream<Tuple2<String, Long>> waterMarkStream = inputMap.assignTimestampsAndWatermarks(
@@ -73,13 +74,13 @@ public class WindowWatermark {
                         arrarList.add(next.f1);
                     }
                     Collections.sort(arrarList);
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS ");
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
                     String result = key + "," + arrarList.size() + "," +
                             sdf.format(arrarList.get(0)) + "," + sdf.format(arrarList.get(arrarList.size() - 1))
                             + "," + sdf.format(window1.getStart()) + "," +
                             sdf.format(window1.getEnd());
                     out.collect(result);
-                });
+                }).returns(Types.STRING);
         window.print();
         env.execute("eventtime-watermark");
     }

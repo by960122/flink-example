@@ -1,12 +1,11 @@
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.common.functions.ReduceFunction;
-import org.apache.flink.api.common.operators.Keys;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
 import org.apache.flink.streaming.api.windowing.time.Time;
-import org.apache.flink.util.Collector;
 
 /**
  * Author:BYDylan
@@ -36,7 +35,8 @@ public class WindowWordCountDemo {
                 out.collect(new WordWithCount(word, 1L));
             }
         }).keyBy(event -> event.word)
-                .timeWindow(Time.seconds(1), Time.seconds(1))//第一个参数是指窗口的大小，第二个参数是指滑动的间隔
+//                .timeWindow(Time.seconds(1), Time.seconds(1))//第一个参数是指窗口的大小，第二个参数是指滑动的间隔,方法过期
+                .window(TumblingEventTimeWindows.of(Time.seconds(5), Time.seconds(1)))
                 //.sum("count");//效果和下面的reduce函数一致
                 .reduce((ReduceFunction<WordWithCount>) (a, b) -> new WordWithCount(a.word, a.count + b.count));
 //        4: 把数据打印到控制台

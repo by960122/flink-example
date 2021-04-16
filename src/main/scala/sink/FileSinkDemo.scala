@@ -6,7 +6,7 @@ import org.apache.flink.api.common.serialization.SimpleStringEncoder;
 import org.apache.flink.core.fs.Path;
 import org.apache.flink.streaming.api.functions.sink.filesystem.StreamingFileSink;
 import org.apache.flink.streaming.api.scala._;
-import source.SourceDemo.SensorReading;;
+import source.SensorReading;
 
 /**
  * Author:BYDylan
@@ -25,7 +25,7 @@ object FileSinkDemo {
 
     val dataStream: DataStream[SensorReading] = fileStream.map(data => {
       val arr = data.split(",");
-      SensorReading(arr(0), arr(1).toLong, arr(2).toDouble);
+      new SensorReading(arr(0), arr(1).toLong, arr(2).toDouble);
     });
 
     dataStream.print();

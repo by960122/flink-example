@@ -16,7 +16,7 @@ import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 
 object SourceDemo {
 
-  case class SensorReading(id: String, timestamp: Long, temperature: Double)
+//  case class SensorReading(id: String, timestamp: Long, temperature: Double)
 
   private val project_path: String = System.getProperty("user.dir");
 
@@ -24,10 +24,10 @@ object SourceDemo {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment;
     env.setParallelism(1);
     val dataList = List(
-      SensorReading("sensor_1", 1547718199, 35.8),
-      SensorReading("sensor_6", 1547718201, 15.4),
-      SensorReading("sensor_7", 1547718202, 6.7),
-      SensorReading("sensor_10", 1547718205, 38.1)
+      new SensorReading("sensor_1", 1547718199, 35.8),
+      new SensorReading("sensor_6", 1547718201, 15.4),
+      new SensorReading("sensor_7", 1547718202, 6.7),
+      new SensorReading("sensor_10", 1547718205, 38.1)
     );
     //    从集合中读取数据
     val collectStream: DataStream[SensorReading] = env.fromCollection(dataList);

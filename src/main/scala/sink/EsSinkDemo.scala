@@ -10,7 +10,7 @@ import org.apache.flink.streaming.connectors.elasticsearch7.ElasticsearchSink;
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.Requests;
-import source.SourceDemo.SensorReading;
+import source.SensorReading;
 
 /**
  * Author:BYDylan
@@ -28,7 +28,7 @@ object EsSinkDemo {
 
     val dataStream: DataStream[SensorReading] = fileStream.map(data => {
       val arr = data.split(",");
-      SensorReading(arr(0), arr(1).toLong, arr(2).toDouble);
+      new SensorReading(arr(0), arr(1).toLong, arr(2).toDouble);
     });
 
     // 定义HttpHosts

@@ -1,9 +1,8 @@
 package operator
 
-import java.util;
-
-import org.apache.flink.streaming.api.collector.selector.OutputSelector;
-import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment};
+import org.apache.flink.streaming.api.functions.ProcessFunction;
+import org.apache.flink.streaming.api.scala.{DataStream, OutputTag, StreamExecutionEnvironment};
+import org.apache.flink.util.Collector;
 import source.custorm.NoParalleSource;
 
 /**
@@ -15,19 +14,18 @@ object SplitDemo {
   def main(args: Array[String]): Unit = {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment;
     import org.apache.flink.api.scala._;
-    val text: DataStream[Long] = env.addSource(new NoParalleSource);
-    val evenStream: DataStream[Long] = text.split(new OutputSelector[Long] {
-      override def select(value: Long) = {
-        val list = new util.ArrayList[String]();
-        if (value % 2 == 0) {
-          list.add("even");
-        } else {
-          list.add("odd");
-        }
-        list;
+    val text: DataStream[Long] = env.addSource(new NoParalleSource)
+
+    val evenTag: OutputTag[Any] = new OutputTag[Any]("even");
+    val oddTag: OutputTag[Any] = new OutputTag[Any]("odd");
+    val splitStream: DataStream[Long] = text.process(new ProcessFunction[Long, Long] {
+      override def processElement(value: Long, context: ProcessFunction[Long, Long]#Context, collector: Collector[Long]) = {
+        if (value % 2 == 0) context.output(evenTag, "");
+        else context.output(oddTag, "");
       }
-    }).select("even"); //    通过select获取指定的数据流
-    evenStream.print().setParallelism(1);
+    });
+
+    splitStream.getSideOutput(evenTag).print().setParallelism(1);
     env.execute("StreamingDemoSplitScala");
   }
 }

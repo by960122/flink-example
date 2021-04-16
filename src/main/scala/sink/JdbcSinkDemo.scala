@@ -2,7 +2,7 @@ package sink
 
 import org.apache.flink.streaming.api.scala._;
 import sink.custorm.JdbcSink;
-import source.SourceDemo.SensorReading;
+import source.SensorReading;
 import source.custorm.SensorSource;
 
 /**

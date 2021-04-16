@@ -1,8 +1,8 @@
 package operator.custorm
 
-import org.apache.flink.api.common.functions.RichMapFunction;
-import org.apache.flink.configuration.Configuration;
-import source.SourceDemo.SensorReading;
+import org.apache.flink.api.common.functions.RichMapFunction
+import org.apache.flink.configuration.Configuration
+import source.SensorReading;
 
 /**
  * Author:BYDylan
