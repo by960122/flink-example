@@ -1,9 +1,10 @@
 package window
 
-import org.apache.flink.streaming.api.datastream.DataStreamSink;
-import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment};
-import org.apache.flink.streaming.api.windowing.time.Time;
-import org.apache.flink.api.scala._;
+import org.apache.flink.streaming.api.datastream.DataStreamSink
+import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
+import org.apache.flink.streaming.api.windowing.time.Time
+import org.apache.flink.api.scala._
+import org.apache.flink.streaming.api.windowing.assigners.{EventTimeSessionWindows, TumblingProcessingTimeWindows};
 
 /**
  * Author:BYDylan
@@ -18,8 +19,10 @@ object WordCountDemo {
     val windowCount: DataStream[WordWithCount] = text.flatMap(l => l.split("\\s"))
       .map(w => WordWithCount(w, 1))
       .keyBy("word")
-      .timeWindow(Time.seconds(3), Time.seconds(1))
-//            .sum("count");
+//      .window(TumblingProcessingTimeWindows.of(Time.seconds(3))) // 滚动窗口
+      .window(TumblingProcessingTimeWindows.of(Time.seconds(3), Time.seconds(1))) // 滑动事件窗口
+//      .window(EventTimeSessionWindows.withGap(Time.seconds(3))) // 会话窗口
+      //            .sum("count");
       .reduce((a, b) => WordWithCount(a.word, a.count + b.count));
 
     //  把数据打印到控制台
