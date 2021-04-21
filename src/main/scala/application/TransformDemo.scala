@@ -15,36 +15,27 @@ import source.SensorReading;
  */
 
 object TransformDemo {
-  private val project_path: String = System.getProperty("user.dir");
+  private val projectPath: String = System.getProperty("user.dir");
 
   def main(args: Array[String]): Unit = {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment;
     env.setParallelism(1);
     // 0.读取数据
-    val filePath = project_path + File.separator + "sensor.txt";
+    val filePath = projectPath + File.separator + "doc\\sensor.txt";
     val fileStream: DataStream[String] = env.readTextFile(filePath);
-
     // 1.先转换成样例类类型（简单转换操作）
     val dataStream: DataStream[SensorReading] = fileStream.map(data => {
       val arr = data.split(",");
       new SensorReading(arr(0), arr(1).toLong, arr(2).toDouble);
-    })
-    //      .filter(new MyFilter);
+    });
 
-    // 2.根据id进行分组,输出每个传感器当前最小值
-    val aggStream: DataStream[SensorReading] = dataStream
-      .keyBy("id")
-      .minBy("temperature");
+
+    // 2.根据id进行分组,输出每个传感器当前最小值,必须要是样例类才可以直接写字段
+    val keyByStream: KeyedStream[SensorReading, String] = dataStream.keyBy(value => value.id);
+    val minByStream: DataStream[SensorReading] = keyByStream.minBy("temperature")
 
     // 3.需要输出当前最小的温度值,以及最近的时间戳,要用reduce
-    val resultStream = dataStream
-      .keyBy("id")
-      //      .reduce((curState, newData) =>
-      //        SensorReading(curState.id, newData.timestamp, curState.temperature.min(newData.temperature))
-      //      )
-      .reduce(new SensorReadingReduce);
-
-    //    resultStream.print()
+    val resultStream = dataStream.keyBy("id").reduce(new SensorReadingReduce);
 
     // 4. 多流转换操作
     // 4.1 分流,将传感器温度数据分成低温、高温两条流
@@ -67,15 +58,14 @@ object TransformDemo {
     });
     val highTempStream: DataStream[SensorReading] = splitStream.getSideOutput(highTag);
     val lowTempStream: DataStream[SensorReading] = splitStream.getSideOutput(lowTag);
-
-    //    highTempStream.print("high")
-    //    lowTempStream.print("low")
+    highTempStream.print("high");
+    lowTempStream.print("low");
 
     // 4.2 合流,connect
     val warningStream: DataStream[(String, Double)] = highTempStream.map(data => (data.id, data.temperature));
     val connectedStreams: ConnectedStreams[(String, Double), SensorReading] = warningStream.connect(lowTempStream);
 
-    // 用coMap对数据进行分别处理
+    // 用coMap对数据进行分别处理,注意看前面返回类型
     val coMapResultStream: DataStream[Product] = connectedStreams.map(
       waringData => (waringData._1, waringData._2, "warning"),
       lowTempData => (lowTempData.id, "healthy")
@@ -84,6 +74,7 @@ object TransformDemo {
     // 4.3 union合流
     val unionStream: DataStream[SensorReading] = highTempStream.union(lowTempStream);
     coMapResultStream.print("coMap");
+    unionStream.print("unionStream");
     env.execute("TransformDemo");
   }
 }

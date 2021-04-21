@@ -1,6 +1,6 @@
 package operator.custorm
 
-import org.apache.flink.api.common.functions.{MapFunction, ReduceFunction}
+import org.apache.flink.api.common.functions.{MapFunction, ReduceFunction};
 import source.SensorReading;
 
 /**

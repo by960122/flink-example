@@ -5,7 +5,7 @@
             <PatternLayout pattern="%-d{yyyy-MM-dd HH:mm:ss} [%p] - [%c{3}:%L] %m%n"/>
         </Console>
 
-        <File name="LogFile" fileName="logs/log%-d{yyyy-MM-dd}.txt" append="false">
+        <File name="LogFile" fileName="logs/log.txt" append="false">
             <PatternLayout pattern="%-d{yyyy-MM-dd HH:mm:ss} [%p] - [%c{3}:%L] %m%n"/>
         </File>
 
@@ -16,7 +16,7 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <logger name="runtime.tasks.StreamTask" level="WARN" additivity="false">
+        <logger name="org.apache.flink" level="WARN" additivity="false">
             <AppenderRef ref="Console"/>
         </logger>
 <!--        <logger name="dao" level="DEBUG" additivity="false">-->

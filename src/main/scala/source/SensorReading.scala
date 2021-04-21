@@ -3,9 +3,10 @@ package source
 /**
  * Author:BYDylan
  * Date:2021/4/16
- * Description:
+ * Description: extends java.io.Serializable
  */
-@SerialVersionUID(99L)
-class SensorReading(var id: String,var timestamp: Long,var temperature: Double) extends java.io.Serializable {
-
+case class SensorReading(var id: String, var timestamp: Long, var temperature: Double) {
+//  override def toString: String = {
+//    id + "," + timestamp + "," + temperature;
+//  }
 }
