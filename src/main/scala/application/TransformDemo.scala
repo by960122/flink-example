@@ -2,6 +2,7 @@ package application
 
 import java.io.File
 import operator.custorm.SensorReadingReduce
+import org.apache.flink.api.java.tuple.Tuple
 import org.apache.flink.streaming.api.functions.ProcessFunction
 import org.apache.flink.streaming.api.scala._
 import org.apache.flink.util.Collector
@@ -16,12 +17,14 @@ import source.SensorReading;
 
 object TransformDemo {
   private val projectPath: String = System.getProperty("user.dir");
+  System.getProperty("log.file", "")
 
   def main(args: Array[String]): Unit = {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment;
     env.setParallelism(1);
     // 0.读取数据
     val filePath = projectPath + File.separator + "doc\\sensor.txt";
+    Tuple
     val fileStream: DataStream[String] = env.readTextFile(filePath);
     // 1.先转换成样例类类型（简单转换操作）
     val dataStream: DataStream[SensorReading] = fileStream.map(data => {

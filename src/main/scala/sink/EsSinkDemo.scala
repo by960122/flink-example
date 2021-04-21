@@ -18,12 +18,12 @@ import source.SensorReading;
  * Description: 输出到 ES
  */
 object EsSinkDemo {
-  private val project_path: String = System.getProperty("user.dir");
+  private val projectPath: String = System.getProperty("user.dir");
 
   def main(args: Array[String]): Unit = {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment;
     env.setParallelism(1);
-    val filePath = project_path + File.separator + "sensor.txt";
+    val filePath = projectPath + File.separator + "sensor.txt";
     val fileStream: DataStream[String] = env.readTextFile(filePath);
 
     val dataStream: DataStream[SensorReading] = fileStream.map(data => {

@@ -28,7 +28,10 @@ object KafkaSinkDemo {
     //    第二种解决方案,设置kafka的最大事务超时时间
     //    修改server.properties 增加一行配置transaction.max.timeout.ms=3600000
 
-    val producer = new FlinkKafkaProducer[String](topic, new MyKafkaSerializationSchema2(topic + "_out"), prop, FlinkKafkaProducer.Semantic.EXACTLY_ONCE);
+    val producer = new FlinkKafkaProducer[String](topic
+      , new MyKafkaSerializationSchema2(topic + "_out")
+      , prop
+      , FlinkKafkaProducer.Semantic.EXACTLY_ONCE);
     //    过期了
     //    val myProducer = new FlinkKafkaProducer[String](topic, new SimpleStringSchema, prop)
     text.addSink(producer);
