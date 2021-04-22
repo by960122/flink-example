@@ -1,19 +1,20 @@
 package window
 
-import org.apache.flink.api.java.utils.ParameterTool;
-import org.apache.flink.contrib.streaming.state.RocksDBStateBackend;
-import org.apache.flink.streaming.api.CheckpointingMode;
-import org.apache.flink.streaming.api.environment.CheckpointConfig.ExternalizedCheckpointCleanup;
-import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment};
-import org.apache.flink.streaming.api.windowing.time.Time;
-import org.apache.flink.api.scala._;
+import org.apache.flink.api.java.utils.ParameterTool
+import org.apache.flink.contrib.streaming.state.RocksDBStateBackend
+import org.apache.flink.streaming.api.CheckpointingMode
+import org.apache.flink.streaming.api.environment.CheckpointConfig.ExternalizedCheckpointCleanup
+import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
+import org.apache.flink.streaming.api.windowing.time.Time
+import org.apache.flink.api.scala._
+import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTimeWindows;
 
 /**
  * Author:BYDylan
  * Date:2020/5/8
  * Description:设置缓存点
  */
-object WordCountCheckPointDemo {
+object CheckPointDemo {
   def main(args: Array[String]): Unit = {
     val port = try
       ParameterTool.fromArgs(args).getInt("port")
@@ -50,7 +51,7 @@ object WordCountCheckPointDemo {
     val windowCount: DataStream[WordWithCount] = text.flatMap(l => l.split("\\s"))
       .map(w => WordWithCount(w, 1))
       .keyBy("word")
-      .timeWindow(Time.seconds(2), Time.seconds(1))
+      .window(TumblingProcessingTimeWindows.of(Time.seconds(2), Time.seconds(1)))
       .sum("count");
     //.reduce((a,b)=>WordWithCount(a.word,a.count+b.count));
 

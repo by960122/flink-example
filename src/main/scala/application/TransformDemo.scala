@@ -24,7 +24,6 @@ object TransformDemo {
     env.setParallelism(1);
     // 0.读取数据
     val filePath = projectPath + File.separator + "doc\\sensor.txt";
-    Tuple
     val fileStream: DataStream[String] = env.readTextFile(filePath);
     // 1.先转换成样例类类型（简单转换操作）
     val dataStream: DataStream[SensorReading] = fileStream.map(data => {
