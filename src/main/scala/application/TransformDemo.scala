@@ -1,11 +1,10 @@
 package application
 
-import java.io.File
-import operator.custorm.SensorReadingReduce
-import org.apache.flink.api.java.tuple.Tuple
-import org.apache.flink.streaming.api.functions.ProcessFunction
-import org.apache.flink.streaming.api.scala._
-import org.apache.flink.util.Collector
+import java.io.File;
+import operator.custorm.SensorReadingReduce;
+import org.apache.flink.streaming.api.functions.ProcessFunction;
+import org.apache.flink.streaming.api.scala._;
+import org.apache.flink.util.Collector;
 import source.SensorReading;
 
 

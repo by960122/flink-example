@@ -16,9 +16,8 @@ import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTime
  */
 object FullCountDemo {
   def main(args: Array[String]): Unit = {
-    val port = 8888;
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment;
-    val text: DataStream[String] = env.socketTextStream("127.0.0.1", port, '\n');
+    val text: DataStream[String] = env.socketTextStream("127.0.0.1", 8888, '\n');
 
     val windowCount: DataStream[String] = text.flatMap(l => l.split("\\s"))
       .map((_, 1))
