@@ -1,6 +1,6 @@
 package operator
 
-import org.apache.flink.api.scala.ExecutionEnvironment;
+import org.apache.flink.api.scala._;
 
 import scala.collection.mutable.ListBuffer;
 
@@ -12,7 +12,6 @@ import scala.collection.mutable.ListBuffer;
 object DistinctDemo {
   def main(args: Array[String]): Unit = {
     val env: ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment;
-    import org.apache.flink.api.scala._;
     val data: ListBuffer[String] = ListBuffer[String]();
     data.append("hello you");
     data.append("hello me");

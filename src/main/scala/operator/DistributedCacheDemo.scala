@@ -5,7 +5,7 @@ import java.util;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.flink.api.common.functions.RichMapFunction;
-import org.apache.flink.api.scala.ExecutionEnvironment;
+import org.apache.flink.api.scala._;
 import org.apache.flink.configuration.Configuration;
 
 /**
@@ -16,7 +16,6 @@ import org.apache.flink.configuration.Configuration;
 object DistributedCacheDemo {
   def main(args: Array[String]): Unit = {
     val env: ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment;
-    import org.apache.flink.api.scala._;
     //    1：注册缓存文件
     env.registerCachedFile("D:\\WorkSpace\\ideaProject\\flink_example\\doc\\data.txt", "b.txt");
     val data: DataSet[String] = env.fromElements("a", "b", "c", "d");

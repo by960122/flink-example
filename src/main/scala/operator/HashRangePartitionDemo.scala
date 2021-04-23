@@ -1,6 +1,6 @@
 package operator
 
-import org.apache.flink.api.scala.ExecutionEnvironment;
+import org.apache.flink.api.scala._;
 
 import scala.collection.mutable.ListBuffer;
 
@@ -13,7 +13,6 @@ object HashRangePartitionDemo {
 
   def main(args: Array[String]): Unit = {
     val env: ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment;
-    import org.apache.flink.api.scala._;
     val data: ListBuffer[(Int, String)] = ListBuffer[Tuple2[Int, String]]();
     data.append((1, "hello1"));
     data.append((2, "hello2"));

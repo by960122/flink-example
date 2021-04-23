@@ -1,6 +1,6 @@
 package operator
 
-import org.apache.flink.api.scala.ExecutionEnvironment;
+import org.apache.flink.api.scala._;
 
 /**
  * Author:BYDylan
@@ -10,7 +10,6 @@ import org.apache.flink.api.scala.ExecutionEnvironment;
 object CrossJoinDemo {
   def main(args: Array[String]): Unit = {
     val env: ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment;
-    import org.apache.flink.api.scala._;
     val data1 = List("zs", "ww");
     val data2 = List(1, 2);
     val text1: DataSet[String] = env.fromCollection(data1);

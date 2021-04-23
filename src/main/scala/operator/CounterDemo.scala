@@ -2,7 +2,7 @@ package operator
 
 import org.apache.flink.api.common.accumulators.IntCounter;
 import org.apache.flink.api.common.functions.RichMapFunction;
-import org.apache.flink.api.scala.ExecutionEnvironment;
+import org.apache.flink.api.scala._;
 import org.apache.flink.configuration.Configuration;;
 
 /**
@@ -13,7 +13,6 @@ import org.apache.flink.configuration.Configuration;;
 object CounterDemo {
   def main(args: Array[String]): Unit = {
     val env: ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment;
-    import org.apache.flink.api.scala._;
 
     val data: DataSet[String] = env.fromElements("a", "b", "c", "d", "x", "y");
     val res: DataSet[String] = data.map(new RichMapFunction[String, String] {

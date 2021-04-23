@@ -1,6 +1,6 @@
 package operator
 
-import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment};
+import org.apache.flink.streaming.api.scala._;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import source.custorm.NoParalleSource;
 
@@ -12,7 +12,6 @@ import source.custorm.NoParalleSource;
 object FilterDemo {
   def main(args: Array[String]): Unit = {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment;
-    import org.apache.flink.api.scala._;
     val text: DataStream[Long] = env.addSource(new NoParalleSource);
     val filterData: DataStream[Long] = text.map(line => {
       println("原始接收到的数据：" + line);

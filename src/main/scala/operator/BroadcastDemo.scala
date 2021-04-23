@@ -1,7 +1,7 @@
 package operator
 
 import org.apache.flink.api.common.functions.RichMapFunction;
-import org.apache.flink.api.scala.ExecutionEnvironment;
+import org.apache.flink.api.scala._;
 import org.apache.flink.configuration.Configuration;
 
 import scala.collection.mutable.ListBuffer;
@@ -14,7 +14,6 @@ import scala.collection.mutable.ListBuffer;
 object BroadcastDemo {
   def main(args: Array[String]): Unit = {
     val env: ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment;
-    import org.apache.flink.api.scala._;
     //    1:初始化需要广播的数据
     val broadData: ListBuffer[(String, Int)] = ListBuffer[Tuple2[String, Int]]();
     broadData.append(("zs", 18));

@@ -1,6 +1,6 @@
 package operator
 
-import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment};
+import org.apache.flink.streaming.api.scala._;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import source.custorm.NoParalleSource;
 
@@ -12,7 +12,6 @@ import source.custorm.NoParalleSource;
 object UnionDemo {
   def main(args: Array[String]): Unit = {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment;
-    import org.apache.flink.api.scala._;
     val text1: DataStream[Long] = env.addSource(new NoParalleSource);
     val text2: DataStream[Long] = env.addSource(new NoParalleSource);
     val unionall = text1.union(text2);

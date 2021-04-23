@@ -1,7 +1,7 @@
 package operator
 
 import org.apache.flink.api.common.operators.Order;
-import org.apache.flink.api.scala.ExecutionEnvironment;
+import org.apache.flink.api.scala._;
 
 import scala.collection.mutable.ListBuffer;
 
@@ -13,7 +13,6 @@ import scala.collection.mutable.ListBuffer;
 object TopNDemo {
   def main(args: Array[String]): Unit = {
     val env: ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment;
-    import org.apache.flink.api.scala._;
     val data = ListBuffer[Tuple2[Int, String]]();
     data.append((2, "zs"));
     data.append((4, "ls"));

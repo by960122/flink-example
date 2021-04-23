@@ -1,6 +1,6 @@
 package operator
 
-import org.apache.flink.api.scala.ExecutionEnvironment;
+import org.apache.flink.api.scala._;
 
 import scala.collection.mutable.ListBuffer;
 
@@ -12,7 +12,6 @@ import scala.collection.mutable.ListBuffer;
 object OuterJoinDemo {
   def main(args: Array[String]): Unit = {
     val env: ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment;
-    import org.apache.flink.api.scala._;
     val data1 = ListBuffer[Tuple2[Int, String]]();
     data1.append((1, "zs"));
     data1.append((2, "ls"));

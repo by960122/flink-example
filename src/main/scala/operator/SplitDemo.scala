@@ -1,8 +1,8 @@
 package operator
 
-import org.apache.flink.streaming.api.functions.ProcessFunction
-import org.apache.flink.streaming.api.scala.{DataStream, OutputTag, StreamExecutionEnvironment}
-import org.apache.flink.util.Collector
+import org.apache.flink.streaming.api.functions.ProcessFunction;
+import org.apache.flink.streaming.api.scala._;
+import org.apache.flink.util.Collector;
 import source.custorm.NoParalleSource;
 
 /**
@@ -13,7 +13,6 @@ import source.custorm.NoParalleSource;
 object SplitDemo {
   def main(args: Array[String]): Unit = {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment;
-    import org.apache.flink.api.scala._;
     val text: DataStream[Long] = env.addSource(new NoParalleSource)
 
     val evenTag: OutputTag[Any] = new OutputTag[Any]("even");

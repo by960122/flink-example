@@ -1,7 +1,7 @@
 package operator
 
 import operator.custorm.ContentPartitioner;
-import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment};
+import org.apache.flink.streaming.api.scala._;
 import source.custorm.NoParalleSource;
 
 /**
@@ -13,7 +13,6 @@ object PartitionerDemo {
   def main(args: Array[String]): Unit = {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment;
     env.setParallelism(2);
-    import org.apache.flink.api.scala._;
     val text = env.addSource(new NoParalleSource);
 
     //    把long类型的数据转成tuple类型,注意tuple1这种写法

@@ -23,7 +23,7 @@ object WatermarkDemo {
       new SensorReading(arr(0), arr(1).toLong, arr(2).toDouble);
     })
       //      .assignAscendingTimestamps(_.timestamp * 1000L) // 升序 watermark,有序的情况下,单位:毫秒数
-      .assignTimestampsAndWatermarks(new BoundedOutOfOrdernessTimestampExtractor[SensorReading](Time.milliseconds(30)) { // 这里定义起始最大延迟
+      .assignTimestampsAndWatermarks(new BoundedOutOfOrdernessTimestampExtractor[SensorReading](Time.seconds(3)) { // 这里定义起始最大延迟
         //        提取时间戳
         override def extractTimestamp(t: SensorReading) = t.timestamp * 1000L;
       });
@@ -31,12 +31,13 @@ object WatermarkDemo {
     val laterData: OutputTag[Tuple3[String, Double, Long]] = new OutputTag[Tuple3[String, Double, Long]]("later");
     val resultDataStream: DataStream[(String, Double, Long)] = dataStream.map(data => (data.id, data.temperature, data.timestamp))
       .keyBy(_._1)
-      .window(TumblingProcessingTimeWindows.of(Time.seconds(6)))
-      .allowedLateness(Time.seconds(10)) // 允许延迟
+      .window(TumblingProcessingTimeWindows.of(Time.seconds(15)))
+      .allowedLateness(Time.minutes(1)) // 允许延迟
       .sideOutputLateData(laterData) // 漏掉的数据测流输出
       .reduce((currentResult, newData) => (currentResult._1, currentResult._2.min(newData._2), newData._3));
 
     //    测流打印
     resultDataStream.getSideOutput(laterData).print().setParallelism(1);
+    env.execute("Watermark demo");
   }
 }
