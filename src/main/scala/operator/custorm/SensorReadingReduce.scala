@@ -1,7 +1,7 @@
 package operator.custorm
 
-import org.apache.flink.api.common.functions.{MapFunction, ReduceFunction};
-import source.SensorReading;
+import org.apache.flink.api.common.functions.{MapFunction, ReduceFunction}
+import source.SensorReading
 
 /**
  * Author:BYDylan
@@ -11,5 +11,5 @@ import source.SensorReading;
 
 class SensorReadingReduce extends ReduceFunction[SensorReading] {
   override def reduce(value1: SensorReading, value2: SensorReading): SensorReading =
-    new SensorReading(value1.id, value2.timestamp, value1.temperature.min(value2.temperature));
+    new SensorReading(value1.id, value2.timestamp, value1.temperature.min(value2.temperature))
 }

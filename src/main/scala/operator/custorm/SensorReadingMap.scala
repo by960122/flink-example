@@ -1,7 +1,7 @@
 package operator.custorm
 
 import org.apache.flink.api.common.functions.MapFunction
-import source.SensorReading;
+import source.SensorReading
 
 /**
  * Author:BYDylan
@@ -10,5 +10,5 @@ import source.SensorReading;
  */
 
 class SensorReadingMap extends MapFunction[SensorReading, String] {
-  override def map(value: SensorReading): String = value.id + " temperature";
+  override def map(value: SensorReading): String = value.id + " temperature"
 }

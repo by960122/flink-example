@@ -1,8 +1,8 @@
 package operator
 
-import org.apache.flink.streaming.api.scala.{ConnectedStreams, DataStream, StreamExecutionEnvironment};
-import source.custorm.NoParalleSource;
-import org.apache.flink.api.scala._;
+import org.apache.flink.streaming.api.scala.{ConnectedStreams, DataStream, StreamExecutionEnvironment}
+import source.custorm.NoParalleSource
+import org.apache.flink.api.scala._
 
 /**
  * Author:BYDylan
@@ -11,19 +11,19 @@ import org.apache.flink.api.scala._;
  */
 object ConnectDemo {
   def main(args: Array[String]): Unit = {
-    val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment;
-    val text1: DataStream[Long] = env.addSource(new NoParalleSource);
-    val text2: DataStream[Long] = env.addSource(new NoParalleSource);
-    val text2_str: DataStream[String] = text2.map("str" + _);
-    val connectStream: ConnectedStreams[Long, String] = text1.connect(text2_str);
+    val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
+    val text1: DataStream[Long] = env.addSource(new NoParalleSource)
+    val text2: DataStream[Long] = env.addSource(new NoParalleSource)
+    val text2_str: DataStream[String] = text2.map("str" + _)
+    val connectStream: ConnectedStreams[Long, String] = text1.connect(text2_str)
     val result = connectStream.map(line1 => {
-      println("line1: " + line1);
-      line1;
+      println("line1: " + line1)
+      line1
     }, line2 => {
-      println("line2: " + line2);
-      line2;
+      println("line2: " + line2)
+      line2
     })
-    result.print().setParallelism(1);
-    env.execute("StreamingDemoConnectScala");
+    result.print().setParallelism(1)
+    env.execute("StreamingDemoConnectScala")
   }
 }

@@ -1,8 +1,8 @@
 package operator
 
-import org.apache.flink.api.scala._;
+import org.apache.flink.api.scala._
 
-import scala.collection.mutable.ListBuffer;
+import scala.collection.mutable.ListBuffer
 
 /**
  * Author:BYDylan
@@ -11,23 +11,23 @@ import scala.collection.mutable.ListBuffer;
  */
 object MapPartitionDemo {
   def main(args: Array[String]): Unit = {
-    val env = ExecutionEnvironment.getExecutionEnvironment;
-    val data = ListBuffer[String]();
-    data.append("hello you");
-    data.append("hello me");
-    val text = env.fromCollection(data);
+    val env = ExecutionEnvironment.getExecutionEnvironment
+    val data = ListBuffer[String]()
+    data.append("hello you")
+    data.append("hello me")
+    val text = env.fromCollection(data)
     text.mapPartition(it => {
       //      创建数据库连接，建议把这块代码放到try-catch代码块中
-      val res = ListBuffer[String]();
+      val res = ListBuffer[String]()
       while (it.hasNext) {
-        val line = it.next();
-        val words = line.split(" ");
+        val line = it.next()
+        val words = line.split(" ")
         for (word <- words) {
-          res.append(word);
+          res.append(word)
         }
       }
-      res;
+      res
 //      关闭连接
-    }).print();
+    }).print()
   }
 }

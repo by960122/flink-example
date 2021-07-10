@@ -1,9 +1,9 @@
 package operator
 
-import org.apache.flink.api.common.accumulators.IntCounter;
-import org.apache.flink.api.common.functions.RichMapFunction;
-import org.apache.flink.api.scala._;
-import org.apache.flink.configuration.Configuration;;
+import org.apache.flink.api.common.accumulators.IntCounter
+import org.apache.flink.api.common.functions.RichMapFunction
+import org.apache.flink.api.scala._
+import org.apache.flink.configuration.Configuration
 
 /**
  * Author:BYDylan
@@ -12,12 +12,12 @@ import org.apache.flink.configuration.Configuration;;
  */
 object CounterDemo {
   def main(args: Array[String]): Unit = {
-    val env: ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment;
+    val env: ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment
 
-    val data: DataSet[String] = env.fromElements("a", "b", "c", "d", "x", "y");
+    val data: DataSet[String] = env.fromElements("a", "b", "c", "d", "x", "y")
     val res: DataSet[String] = data.map(new RichMapFunction[String, String] {
       //      1：定义一个累加器
-      val numLines = new IntCounter;
+      val numLines = new IntCounter
 
       override def open(parameters: Configuration): Unit = {
         super.open(parameters)
@@ -27,17 +27,17 @@ object CounterDemo {
 
       override def map(value: String): String = {
         //        对计数器累加1
-        this.numLines.add(1);
-        return value;
+        this.numLines.add(1)
+        return value
       }
 
-    }).setParallelism(4);
-    res.writeAsText("D:\\WorkSpace\\ideaProject\\flink_example\\doc");
+    }).setParallelism(4)
+    res.writeAsText("D:\\WorkSpace\\ideaProject\\flink_example\\doc")
 
-    //    res.print();
+    //    res.print()
 
     //    3: 获取累加器的执行结果
-    val num: Int = env.execute("BatchDemoCounterScala").getAccumulatorResult[Int]("num-lines");
-    println(num);
+    val num: Int = env.execute("BatchDemoCounterScala").getAccumulatorResult[Int]("num-lines")
+    println(num)
   }
 }

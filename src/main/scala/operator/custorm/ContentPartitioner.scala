@@ -1,6 +1,6 @@
 package operator.custorm
 
-import org.apache.flink.api.common.functions.Partitioner;
+import org.apache.flink.api.common.functions.Partitioner
 
 /**
  * Author:BYDylan
@@ -9,11 +9,11 @@ import org.apache.flink.api.common.functions.Partitioner;
  */
 class ContentPartitioner extends Partitioner[Long] {
   override def partition(key: Long, numPartitions: Int) = {
-    println("分区总数: " + numPartitions);
+    println("分区总数: " + numPartitions)
     if (key % numPartitions == 0) {
-      0;
+      0
     } else {
-      1;
+      1
     }
   }
 }

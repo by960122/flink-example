@@ -2,7 +2,7 @@ package operator.custorm
 
 import org.apache.flink.api.common.functions.RichMapFunction
 import org.apache.flink.configuration.Configuration
-import source.SensorReading;
+import source.SensorReading
 
 /**
  * Author:BYDylan
@@ -15,7 +15,7 @@ class SensorReadingRichMap extends RichMapFunction[SensorReading, String] {
   override def open(parameters: Configuration): Unit = {
   }
 
-  override def map(value: SensorReading): String = value.id + " temperature";
+  override def map(value: SensorReading): String = value.id + " temperature"
 
   //  一般做收尾工作,比如关闭连接,或者清空状态
   override def close(): Unit = {

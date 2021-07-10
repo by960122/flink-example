@@ -1,12 +1,12 @@
 package operator
 
-import java.io.File;
-import java.util;
+import java.io.File
+import java.util
 
-import org.apache.commons.io.FileUtils;
-import org.apache.flink.api.common.functions.RichMapFunction;
-import org.apache.flink.api.scala._;
-import org.apache.flink.configuration.Configuration;
+import org.apache.commons.io.FileUtils
+import org.apache.flink.api.common.functions.RichMapFunction
+import org.apache.flink.api.scala._
+import org.apache.flink.configuration.Configuration
 
 /**
  * Author:BYDylan
@@ -15,25 +15,25 @@ import org.apache.flink.configuration.Configuration;
  */
 object DistributedCacheDemo {
   def main(args: Array[String]): Unit = {
-    val env: ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment;
+    val env: ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment
     //    1：注册缓存文件
-    env.registerCachedFile("D:\\WorkSpace\\ideaProject\\flink_example\\doc\\data.txt", "b.txt");
-    val data: DataSet[String] = env.fromElements("a", "b", "c", "d");
+    env.registerCachedFile("D:\\WorkSpace\\ideaProject\\flink_example\\doc\\data.txt", "b.txt")
+    val data: DataSet[String] = env.fromElements("a", "b", "c", "d")
     data.map(new RichMapFunction[String, String] {
       override def open(parameters: Configuration): Unit = {
-        super.open(parameters);
+        super.open(parameters)
         //        2：获取缓存文件
-        val myFile: File = getRuntimeContext.getDistributedCache.getFile("b.txt");
-        val lines: util.List[String] = FileUtils.readLines(myFile);
-        val it: util.Iterator[String] = lines.iterator();
+        val myFile: File = getRuntimeContext.getDistributedCache.getFile("b.txt")
+        val lines: util.List[String] = FileUtils.readLines(myFile)
+        val it: util.Iterator[String] = lines.iterator()
         while (it.hasNext) {
-          println("line: " + it.next());
+          println("line: " + it.next())
         }
       }
 
       override def map(value: String): String = {
-        return value;
+        return value
       }
-    }).print();
+    }).print()
   }
 }

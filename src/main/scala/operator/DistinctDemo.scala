@@ -1,8 +1,8 @@
 package operator
 
-import org.apache.flink.api.scala._;
+import org.apache.flink.api.scala._
 
-import scala.collection.mutable.ListBuffer;
+import scala.collection.mutable.ListBuffer
 
 /**
  * Author:BYDylan
@@ -11,18 +11,18 @@ import scala.collection.mutable.ListBuffer;
  */
 object DistinctDemo {
   def main(args: Array[String]): Unit = {
-    val env: ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment;
-    val data: ListBuffer[String] = ListBuffer[String]();
-    data.append("hello you");
-    data.append("hello me");
-    val text: DataSet[String] = env.fromCollection(data);
+    val env: ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment
+    val data: ListBuffer[String] = ListBuffer[String]()
+    data.append("hello you")
+    data.append("hello me")
+    val text: DataSet[String] = env.fromCollection(data)
     val flatMapData: DataSet[String] = text.flatMap(line => {
-      val words = line.split(" ");
+      val words = line.split(" ")
       for (word <- words) {
-        println("单词: " + word);
+        println("单词: " + word)
       }
-      words;
-    });
-    flatMapData.distinct().print();
+      words
+    })
+    flatMapData.distinct().print()
   }
 }

@@ -7,6 +7,6 @@ package source
  */
 case class SensorReading(var id: String, var timestamp: Long, var temperature: Double) {
 //  override def toString: String = {
-//    id + "," + timestamp + "," + temperature;
+//    id + "," + timestamp + "," + temperature
 //  }
 }

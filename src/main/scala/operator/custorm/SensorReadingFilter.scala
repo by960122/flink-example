@@ -1,7 +1,7 @@
 package operator.custorm
 
 import org.apache.flink.api.common.functions.FilterFunction
-import source.SensorReading;
+import source.SensorReading
 
 /**
  * Author:BYDylan
@@ -10,5 +10,5 @@ import source.SensorReading;
  */
 class SensorReadingFilter extends FilterFunction[SensorReading] {
   override def filter(value: SensorReading): Boolean =
-    value.id.startsWith("sensor_1");
+    value.id.startsWith("sensor_1")
 }

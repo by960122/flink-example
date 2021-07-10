@@ -4,7 +4,7 @@ import org.apache.flink.streaming.api.datastream.DataStreamSink
 import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
 import org.apache.flink.streaming.api.windowing.time.Time
 import org.apache.flink.api.scala._
-import org.apache.flink.streaming.api.windowing.assigners.{EventTimeSessionWindows, TumblingProcessingTimeWindows};
+import org.apache.flink.streaming.api.windowing.assigners.{EventTimeSessionWindows, TumblingProcessingTimeWindows}
 
 /**
  * Author:BYDylan
@@ -14,22 +14,22 @@ import org.apache.flink.streaming.api.windowing.assigners.{EventTimeSessionWindo
  */
 object WindowDemo {
   def main(args: Array[String]): Unit = {
-    val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment;
-    val text: DataStream[String] = env.socketTextStream("127.0.0.1", 8888, '\n');
+    val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
+    val text: DataStream[String] = env.socketTextStream("127.0.0.1", 8888, '\n')
     val windowCount: DataStream[WordWithCount] = text.flatMap(l => l.split("\\s"))
       .map(w => WordWithCount(w, 1))
       .keyBy("word")
       .window(TumblingProcessingTimeWindows.of(Time.seconds(3))) // 滚动窗口
       //      .window(TumblingProcessingTimeWindows.of(Time.seconds(3), Time.seconds(1))) // 滑动事件窗口
       //      .window(EventTimeSessionWindows.withGap(Time.seconds(3))) // 会话窗口
-      //            .sum("count");
-      .reduce((a, b) => WordWithCount(a.word, a.count + b.count));
+      //            .sum("count")
+      .reduce((a, b) => WordWithCount(a.word, a.count + b.count))
     //  把数据打印到控制台
-    windowCount.print().setParallelism(1);
+    windowCount.print().setParallelism(1)
     //  执行任务
-    env.execute("SocketWindowCount");
+    env.execute("SocketWindowCount")
   }
 
-  case class WordWithCount(word: String, count: Long);
+  case class WordWithCount(word: String, count: Long)
 
 }

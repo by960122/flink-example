@@ -1,6 +1,6 @@
 package operator
 
-import org.apache.flink.api.scala._;
+import org.apache.flink.api.scala._
 
 /**
  * Author:BYDylan
@@ -9,24 +9,24 @@ import org.apache.flink.api.scala._;
  */
 object WordCountDemo {
   def main(args: Array[String]) {
-    val inputPath = "D:\\WorkSpace\\ideaProject\\flink_example\\doc\\data.txt";
-    val outputPath = "D:\\WorkSpace\\ideaProject\\flink_example\\doc";
+    val inputPath = "D:\\WorkSpace\\ideaProject\\flink_example\\doc\\data.txt"
+    val outputPath = "D:\\WorkSpace\\ideaProject\\flink_example\\doc"
     //获取执行环境
-    val env: ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment;
+    val env: ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment
     //读取本地文件中的数据
-    val text: DataSet[String] = env.readTextFile(inputPath);
+    val text: DataSet[String] = env.readTextFile(inputPath)
     //对数据进行处理
     val wordCount: AggregateDataSet[(String, Int)] = text.flatMap(_.toLowerCase()
       .split("\\W+"))
       .filter(_.nonEmpty)
       .map((_, 1))
       .groupBy(0)
-      .sum(1);
-    //    println(wordCount);
-    wordCount.print();
+      .sum(1)
+    //    println(wordCount)
+    wordCount.print()
     //把结果保存到文件中
-    //    wordCount.writeAsCsv(outputPath,"\n"," ").setParallelism(1);
+    //    wordCount.writeAsCsv(outputPath,"\n"," ").setParallelism(1)
     //提交任务
-    //    env.execute("batch word count scala");
+    //    env.execute("batch word count scala")
   }
 }
