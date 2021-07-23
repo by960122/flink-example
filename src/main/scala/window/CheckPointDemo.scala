@@ -1,18 +1,19 @@
 package window
 
+import org.apache.flink.api.scala._
 import org.apache.flink.api.java.utils.ParameterTool
-import org.apache.flink.contrib.streaming.state.RocksDBStateBackend
 import org.apache.flink.streaming.api.CheckpointingMode
 import org.apache.flink.streaming.api.environment.CheckpointConfig.ExternalizedCheckpointCleanup
 import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
 import org.apache.flink.streaming.api.windowing.time.Time
-import org.apache.flink.api.scala._
+import org.apache.flink.runtime.state.hashmap.HashMapStateBackend
+import org.apache.flink.runtime.state.storage.JobManagerCheckpointStorage
 import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTimeWindows
 
 /**
  * Author:BYDylan
  * Date:2020/5/8
- * Description:设置缓存点
+ * Description:设置缓存点,状态后端
  */
 object CheckPointDemo {
   def main(args: Array[String]): Unit = {
@@ -41,9 +42,19 @@ object CheckPointDemo {
     env.getCheckpointConfig.enableExternalizedCheckpoints(ExternalizedCheckpointCleanup.RETAIN_ON_CANCELLATION)
 
     //    设置statebackend
-    //    env.setStateBackend(new MemoryStateBackend())
-    //    env.setStateBackend(new FsStateBackend("hdfs://127.0.0.1:9000/flink/checkpoint"))
-    env.setStateBackend(new RocksDBStateBackend("hdfs://127.0.0.1:8888/flink/checkpoint", true))
+    //    MemoryStateBackend 内存级状态后端
+    env.setStateBackend(new HashMapStateBackend)
+    env.getCheckpointConfig.setCheckpointStorage(new JobManagerCheckpointStorage)
+    //    FsStateBackend  文件级状态后端
+    //    env.setStateBackend(new HashMapStateBackend)
+    //    env.getCheckpointConfig.setCheckpointStorage("hdfs://192.168.1.201:50070/flink/checkpoint")
+    //    高级写法
+    //    env.getCheckpointConfig.setCheckpointStorage(new FileSystemCheckpointStorage("file:///checkpoint-dir"))
+    //    RocksDBStateBackend   序列化后,本地RocksDB状态后端
+    //    env.setStateBackend(new EmbeddedRocksDBStateBackend)
+    //    env.getCheckpointConfig.setCheckpointStorage(new FileSystemCheckpointStorage("file:///checkpoint-dir"))
+    //    高级写法
+    //    env.getCheckpointConfig.setCheckpointStorage(new FileSystemCheckpointStorage("file:///checkpoint-dir"))
 
     //    指定数据源(socket)
     val text: DataStream[String] = env.socketTextStream("127.0.0.1", port, '\n')
