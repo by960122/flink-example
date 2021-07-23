@@ -1,5 +1,6 @@
 package window
 
+import org.apache.flink.api.common.restartstrategy.RestartStrategies
 import org.apache.flink.api.scala._
 import org.apache.flink.api.java.utils.ParameterTool
 import org.apache.flink.streaming.api.CheckpointingMode
@@ -38,9 +39,12 @@ object CheckPointDemo {
     env.getCheckpointConfig.setCheckpointTimeout(60000)
     //    同一时间只允许进行一个检查点
     env.getCheckpointConfig.setMaxConcurrentCheckpoints(1)
+    //    容许失败的检查点个数
+    env.getCheckpointConfig.setTolerableCheckpointFailureNumber(3)
     //    表示一旦Flink处理程序被cancel后,会保留Checkpoint数据,以便根据实际需要恢复到指定的Checkpoint
     env.getCheckpointConfig.enableExternalizedCheckpoints(ExternalizedCheckpointCleanup.RETAIN_ON_CANCELLATION)
-
+    //    重启次数,3次重启,间隔10秒
+    env.setRestartStrategy(RestartStrategies.fixedDelayRestart(3, 10000L))
     //    设置statebackend
     //    MemoryStateBackend 内存级状态后端
     env.setStateBackend(new HashMapStateBackend)
@@ -64,10 +68,10 @@ object CheckPointDemo {
       .keyBy("word")
       .window(TumblingProcessingTimeWindows.of(Time.seconds(2), Time.seconds(1)))
       .sum("count")
-    //.reduce((a,b)=>WordWithCount(a.word,a.count+b.count))
+//      .reduce((a, b) => WordWithCount(a.word, a.count + b.count))
 
     windowCount.print().setParallelism(1)
-    env.execute("SocketWindowCount")
+    env.execute("CheckPointDemo")
   }
 
   case class WordWithCount(word: String, count: Long)
