@@ -18,7 +18,7 @@ object ProcessFunctionDemo {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
     val socketStream: DataStream[String] = env.socketTextStream("127.0.0.1", 8888, '\n')
 
-    val dataStream: DataStream[SensorReading] = socketStream.flatMap(l => l.split("\\s"))
+    val dataStream: DataStream[String] = socketStream.flatMap(l => l.split("\\s"))
       .map(data => {
         val arr = data.split(",")
         new SensorReading(arr(0), arr(1).toLong, arr(2).toDouble)
@@ -62,7 +62,7 @@ class TempIncreWarning(interval: Long) extends KeyedProcessFunction[String, Sens
   }
 }
 
-//功能测试
+//功能测试,三个参数分别为(key,输入,输出)
 class MykeyedProcessFunction extends KeyedProcessFunction[String, SensorReading, String] {
 
   override def open(parameters: Configuration): Unit = {

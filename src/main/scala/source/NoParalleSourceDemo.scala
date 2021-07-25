@@ -3,6 +3,7 @@ package source
 import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
 import org.apache.flink.streaming.api.windowing.time.Time
 import source.custorm.NoParalleSource
+import org.apache.flink.api.scala._
 
 /**
  * Author:BYDylan
@@ -12,7 +13,6 @@ import source.custorm.NoParalleSource
 object NoParalleSourceDemo {
   def main(args: Array[String]): Unit = {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
-    import org.apache.flink.api.scala._
     //    添加自定义的source组件
     val text: DataStream[Long] = env.addSource(new NoParalleSource)
     val mapData: DataStream[Long] = text.map(line => {

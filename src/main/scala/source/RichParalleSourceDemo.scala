@@ -1,5 +1,6 @@
 package source
 
+import org.apache.flink.api.scala._
 import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
 import org.apache.flink.streaming.api.windowing.time.Time
 import source.custorm.RichParalleSource
@@ -12,7 +13,6 @@ import source.custorm.RichParalleSource
 object RichParalleSourceDemo {
   def main(args: Array[String]): Unit = {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
-    import org.apache.flink.api.scala._
     val text: DataStream[Long] = env.addSource(new RichParalleSource).setParallelism(2)
     val mapData: DataStream[Long] = text.map(line => {
       println("接收到的数据：" + line)

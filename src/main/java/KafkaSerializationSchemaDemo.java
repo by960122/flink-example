@@ -1,5 +1,4 @@
 import org.apache.flink.streaming.connectors.kafka.KafkaContextAware;
-import org.apache.flink.streaming.connectors.kafka.KafkaSerializationSchema;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import scala.tools.jline_embedded.internal.Nullable;
 

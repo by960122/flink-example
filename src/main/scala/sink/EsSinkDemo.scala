@@ -23,7 +23,7 @@ object EsSinkDemo {
   def main(args: Array[String]): Unit = {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
     env.setParallelism(1)
-    val filePath = projectPath + File.separator + "sensor.txt"
+    val filePath = projectPath + File.separator + "doc\\sensor.txt"
     val fileStream: DataStream[String] = env.readTextFile(filePath)
 
     val dataStream: DataStream[SensorReading] = fileStream.map(data => {
