@@ -14,7 +14,7 @@ import java.io.File
  * Date:2021/7/24
  * Description: Table api 基本使用
  */
-object TableAPIDemo {
+object TableFromDataStreamDemo {
   private val projectPath: String = System.getProperty("user.dir")
   private val logger: Logger = LoggerFactory.getLogger(this.getClass)
 
