@@ -6,9 +6,9 @@ import source.SensorReading
 import scala.util.Random
 
 /**
- * Author:BYDylan
- * Date:2020/11/6
- * Description: 自定义 SourceFunction
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 自定义 SourceFunction
  */
 class SensorSource extends SourceFunction[SensorReading] {
   //  定义一个标识位flag,用来表示数据源是否正常运行发出数据

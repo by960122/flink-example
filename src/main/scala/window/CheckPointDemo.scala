@@ -12,9 +12,9 @@ import org.apache.flink.runtime.state.storage.JobManagerCheckpointStorage
 import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTimeWindows
 
 /**
- * Author:BYDylan
- * Date:2020/5/8
- * Description:设置缓存点,状态后端
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 设置缓存点,状态后端
  */
 object CheckPointDemo {
   def main(args: Array[String]): Unit = {

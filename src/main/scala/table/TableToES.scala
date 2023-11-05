@@ -9,9 +9,9 @@ import org.apache.flink.table.descriptors.{Csv, Elasticsearch, FileSystem, Json,
 import java.io.File
 
 /**
- * Author:BYDylan
- * Date:2021/10/27
- * Description: 写入 ES
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 写入 ES
  */
 object TableToES {
   private val projectPath: String = System.getProperty("user.dir")

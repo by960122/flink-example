@@ -9,9 +9,9 @@ import org.apache.flink.table.descriptors._
 import java.io.File
 
 /**
- * Author:BYDylan
- * Date:2021/10/27
- * Description: 写入 MySQL
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 写入 MySQL
  */
 object TableToMySQL {
   private val projectPath: String = System.getProperty("user.dir")

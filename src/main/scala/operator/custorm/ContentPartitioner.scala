@@ -3,9 +3,9 @@ package operator.custorm
 import org.apache.flink.api.common.functions.Partitioner
 
 /**
- * Author:BYDylan
- * Date:2020/5/7
- * Description:自定义分区
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 自定义分区
  */
 class ContentPartitioner extends Partitioner[Long] {
   override def partition(key: Long, numPartitions: Int) = {

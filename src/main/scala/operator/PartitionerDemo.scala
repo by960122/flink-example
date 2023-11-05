@@ -5,9 +5,9 @@ import org.apache.flink.streaming.api.scala._
 import source.custorm.NoParalleSource
 
 /**
- * Author:BYDylan
- * Date:2020/5/7
- * Description: 使用自定义分区
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 使用自定义分区
  */
 object PartitionerDemo {
   def main(args: Array[String]): Unit = {

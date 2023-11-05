@@ -9,9 +9,10 @@ import org.apache.flink.streaming.api.functions.KeyedProcessFunction
 import source.SensorReading
 
 /** *
- * Author:BYDylan
- * Date:2021/7/23
- * Description: 温度连续上升N秒则输出告警,这种需求用任何一种窗口都会有遗漏
+ *
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 温度连续上升N秒则输出告警,这种需求用任何一种窗口都会有遗漏
  */
 object ProcessFunctionDemo {
   def main(args: Array[String]): Unit = {

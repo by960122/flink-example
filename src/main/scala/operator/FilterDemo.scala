@@ -5,9 +5,9 @@ import org.apache.flink.streaming.api.windowing.time.Time
 import source.custorm.NoParalleSource
 
 /**
- * Author:BYDylan
- * Date:2020/5/6
- * Description: 过滤保留满足条件的数据
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 过滤保留满足条件的数据
  */
 object FilterDemo {
   def main(args: Array[String]): Unit = {

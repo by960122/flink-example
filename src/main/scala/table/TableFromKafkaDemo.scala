@@ -8,9 +8,9 @@ import org.apache.flink.table.descriptors.{Csv, FileSystem, Kafka, Schema}
 import java.io.File
 
 /**
- * Author:BYDylan
- * Date:2021/7/24
- * Description: 从 kafka 定义表
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 从 kafka 定义表
  */
 object TableFromKafkaDemo {
   def main(args: Array[String]) {

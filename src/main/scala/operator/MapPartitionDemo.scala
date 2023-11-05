@@ -5,9 +5,9 @@ import org.apache.flink.api.scala._
 import scala.collection.mutable.ListBuffer
 
 /**
- * Author:BYDylan
- * Date:2020/5/7
- * Description: 使用mappartition，每次处理一批数据
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 使用mappartition，每次处理一批数据
  */
 object MapPartitionDemo {
   def main(args: Array[String]): Unit = {

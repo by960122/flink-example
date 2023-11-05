@@ -7,9 +7,9 @@ import org.apache.flink.configuration.Configuration
 import scala.collection.mutable.ListBuffer
 
 /**
- * Author:BYDylan
- * Date:2020/5/5
- * Description:广播变量
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 广播变量
  */
 object BroadcastDemo {
   def main(args: Array[String]): Unit = {

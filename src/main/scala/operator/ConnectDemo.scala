@@ -5,9 +5,9 @@ import source.custorm.NoParalleSource
 import org.apache.flink.api.scala._
 
 /**
- * Author:BYDylan
- * Date:2020/5/6
- * Description:合并,限制2个,不限制类型
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 合并,限制2个,不限制类型
  */
 object ConnectDemo {
   def main(args: Array[String]): Unit = {

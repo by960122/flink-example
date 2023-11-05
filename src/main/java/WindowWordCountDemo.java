@@ -8,9 +8,9 @@ import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindo
 import org.apache.flink.streaming.api.windowing.time.Time;
 
 /**
- * Author:BYDylan
- * Date:2020/5/4
- * Description:手工通过socket实时产生一些单词,使用flink实时接收数据,对指定时间窗口内(例如：2秒)的数据进行聚合统计，并且把时间窗口内计算的结果打印出来
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 手工通过socket实时产生一些单词, 使用flink实时接收数据, 对指定时间窗口内(例如 ： 2秒)的数据进行聚合统计，并且把时间窗口内计算的结果打印出来
  */
 public class WindowWordCountDemo {
     public static void main(String[] args) throws Exception {

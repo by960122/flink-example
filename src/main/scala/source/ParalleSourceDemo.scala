@@ -5,9 +5,9 @@ import org.apache.flink.streaming.api.windowing.time.Time
 import source.custorm.ParalleSource
 
 /**
- * Author:BYDylan
- * Date:2020/5/6
- * Description:使用支持多并行度的source
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 使用支持多并行度的source
  */
 object ParalleSourceDemo {
   def main(args: Array[String]): Unit = {

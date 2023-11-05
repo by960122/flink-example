@@ -6,9 +6,9 @@ import java.sql.{Connection, DriverManager, PreparedStatement}
 import org.apache.flink.configuration.Configuration
 
 /**
- * Author:BYDylan
- * Date:2020/11/6
- * Description: 自定义 JDBC sink
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 自定义 JDBC sink
  */
 
 class JdbcSink extends RichSinkFunction[SensorReading] {

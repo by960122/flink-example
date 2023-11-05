@@ -3,9 +3,9 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import scala.tools.jline_embedded.internal.Nullable;
 
 /**
- * Author:BYDylan
- * Date:2020/5/8
- * Description:实现 kaSerializationSchema
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 实现 kaSerializationSchema
  */
 public class KafkaSerializationSchemaDemo<T>
         implements org.apache.flink.streaming.connectors.kafka.KafkaSerializationSchema<T>, KafkaContextAware<T> {

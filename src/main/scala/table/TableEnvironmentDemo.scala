@@ -4,9 +4,9 @@ import org.apache.flink.streaming.api.scala.StreamExecutionEnvironment
 import org.apache.flink.table.api.{EnvironmentSettings, TableEnvironment}
 
 /**
- * Author:BYDylan
- * Date:2021/7/24
- * Description: 新旧版本流批处理差异
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 新旧版本流批处理差异
  */
 object TableEnvironmentDemo {
   def main(args: Array[String]) {

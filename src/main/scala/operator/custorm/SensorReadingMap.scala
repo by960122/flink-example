@@ -4,9 +4,9 @@ import org.apache.flink.api.common.functions.MapFunction
 import source.SensorReading
 
 /**
- * Author:BYDylan
- * Date:2020/11/6
- * Description:
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description:
  */
 
 class SensorReadingMap extends MapFunction[SensorReading, String] {

@@ -8,9 +8,9 @@ import org.apache.flink.streaming.connectors.kafka.{FlinkKafkaProducer, KafkaCon
 import org.apache.kafka.clients.producer.ProducerRecord
 
 /**
- * Author:BYDylan
- * Date:2020/5/8
- * Description: 输出到 kafka
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 输出到 kafka
  */
 object KafkaSinkDemo {
   def main(args: Array[String]): Unit = {

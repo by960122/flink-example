@@ -9,9 +9,9 @@ import org.apache.flink.api.scala._
 import org.apache.flink.configuration.Configuration
 
 /**
- * Author:BYDylan
- * Date:2020/5/7
- * Description: 分布式缓存
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 分布式缓存
  */
 object DistributedCacheDemo {
   def main(args: Array[String]): Unit = {

@@ -5,9 +5,9 @@ import org.apache.flink.api.scala._
 import scala.collection.mutable.ListBuffer
 
 /**
- * Author:BYDylan
- * Date:2020/5/7
- * Description:分区
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 分区
  */
 object HashRangePartitionDemo {
 

@@ -6,9 +6,9 @@ import source.SensorReading
 import source.custorm.SensorSource
 
 /**
- * Author:BYDylan
- * Date:2020/11/6
- * Description: 输出到 JDBC
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 输出到 JDBC
  */
 object JdbcSinkDemo {
   private val projectPath: String = System.getProperty("user.dir")

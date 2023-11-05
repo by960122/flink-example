@@ -4,9 +4,9 @@ import org.apache.flink.streaming.api.functions.source.SourceFunction
 import org.apache.flink.streaming.api.functions.source.SourceFunction.SourceContext
 
 /**
- * Author:BYDylan
- * Date:2020/5/6
- * Description:创建并轻度为1的自定义source,实现从1开始产生递增数字
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 创建并轻度为1的自定义source,实现从1开始产生递增数字
  */
 class NoParalleSource extends SourceFunction[Long] {
   var count = 1L

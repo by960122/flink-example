@@ -5,9 +5,9 @@ import org.apache.flink.configuration.Configuration
 import source.SensorReading
 
 /**
- * Author:BYDylan
- * Date:2020/11/6
- * Description: 富函数,可以获取到运行时上下文,还有一些生命周期
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 富函数,可以获取到运行时上下文,还有一些生命周期
  */
 
 class SensorReadingRichMap extends RichMapFunction[SensorReading, String] {

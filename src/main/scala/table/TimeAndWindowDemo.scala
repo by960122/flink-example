@@ -10,9 +10,9 @@ import org.apache.flink.table.api.{AnyWithOperations, EnvironmentSettings, Field
 import org.apache.flink.types.Row
 
 /**
- * Author:BYDylan
- * Date:2020/5/4
- * Description:
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description:
  */
 object TimeAndWindowDemo {
   def main(args: Array[String]): Unit = {

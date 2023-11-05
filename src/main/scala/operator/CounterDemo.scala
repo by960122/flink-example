@@ -6,9 +6,9 @@ import org.apache.flink.api.scala._
 import org.apache.flink.configuration.Configuration
 
 /**
- * Author:BYDylan
- * Date:2020/5/7
- * Description:累加器
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 累加器
  */
 object CounterDemo {
   def main(args: Array[String]): Unit = {

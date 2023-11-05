@@ -8,9 +8,9 @@ import org.apache.flink.streaming.api.scala._
 import source.SensorReading
 
 /**
- * Author:BYDylan
- * Date:2021/4/23
- * Description: 键控状态
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 键控状态
  */
 object StateDemo {
   def main(args: Array[String]) {

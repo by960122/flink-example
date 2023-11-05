@@ -8,9 +8,9 @@ import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTime
 import source.SensorReading
 
 /**
- * Author:BYDylan
- * Date:2021/4/22
- * Description:水位线 watermark
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 水位线 watermark
  */
 object WatermarkDemo {
   def main(args: Array[String]) {

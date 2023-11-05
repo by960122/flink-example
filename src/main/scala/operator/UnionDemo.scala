@@ -5,9 +5,9 @@ import org.apache.flink.streaming.api.windowing.time.Time
 import source.custorm.NoParalleSource
 
 /**
- * Author:BYDylan
- * Date:2020/5/6
- * Description:合并,不限制个数,但限制类型
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 合并,不限制个数,但限制类型
  */
 object UnionDemo {
   def main(args: Array[String]): Unit = {

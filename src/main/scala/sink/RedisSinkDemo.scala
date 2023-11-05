@@ -6,9 +6,9 @@ import org.apache.flink.streaming.connectors.redis.common.config.FlinkJedisPoolC
 import org.apache.flink.streaming.connectors.redis.common.mapper.{RedisCommand, RedisCommandDescription, RedisMapper}
 
 /**
- * Author:BYDylan
- * Date:2020/5/7
- * Description: 输出到 redis
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 输出到 redis
  */
 object RedisSinkDemo {
   def main(args: Array[String]): Unit = {

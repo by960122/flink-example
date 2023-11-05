@@ -6,9 +6,9 @@ import org.apache.flink.util.Collector
 import source.custorm.NoParalleSource
 
 /**
- * Author:BYDylan
- * Date:2020/5/6
- * Description:切分数据流
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 切分数据流
  */
 object SplitDemo {
   def main(args: Array[String]): Unit = {

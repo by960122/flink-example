@@ -4,9 +4,9 @@ import org.apache.flink.api.common.functions.{MapFunction, ReduceFunction}
 import source.SensorReading
 
 /**
- * Author:BYDylan
- * Date:2020/11/6
- * Description: 自定义 Reduce
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 自定义 Reduce
  */
 
 class SensorReadingReduce extends ReduceFunction[SensorReading] {

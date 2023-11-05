@@ -3,9 +3,9 @@ package operator
 import org.apache.flink.api.scala._
 
 /**
- * Author:BYDylan
- * Date:2020/5/5
- * Description:单词计数,读取本地文件,对文件中的单词进行拆分,并且统计每个单词出现的总次数
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 单词计数,读取本地文件,对文件中的单词进行拆分,并且统计每个单词出现的总次数
  */
 object WordCountDemo {
   def main(args: Array[String]) {

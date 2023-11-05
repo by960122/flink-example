@@ -7,10 +7,10 @@ import org.apache.flink.api.scala._
 import org.apache.flink.streaming.api.windowing.assigners.{EventTimeSessionWindows, TumblingProcessingTimeWindows}
 
 /**
- * Author:BYDylan
- * Date:2020/5/4
- * Description:手工通过socket实时产生一些单词,使用flink实时接收数据,对指定时间窗口内(例如：2秒)的数据进行聚合统计,并且把时间窗口内计算的结果打印出来
- * 流处理:统计单位时间内,注意 timeWindow的第二个参数,必须在这个时间内的数据才会进行计算
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 手工通过socket实时产生一些单词,使用flink实时接收数据,对指定时间窗口内(例如：2秒)的数据进行聚合统计,并且把时间窗口内计算的结果打印出来
+ *               流处理:统计单位时间内,注意 timeWindow的第二个参数,必须在这个时间内的数据才会进行计算
  */
 object WindowDemo {
   def main(args: Array[String]): Unit = {

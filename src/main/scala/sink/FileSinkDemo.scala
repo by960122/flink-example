@@ -9,9 +9,9 @@ import org.apache.flink.streaming.api.scala._
 import source.SensorReading
 
 /**
- * Author:BYDylan
- * Date:2020/11/6
- * Description: 输出到文件
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 输出到文件
  */
 
 object FileSinkDemo {

@@ -6,9 +6,9 @@ import org.apache.flink.streaming.api.windowing.time.Time
 import source.custorm.RichParalleSource
 
 /**
- * Author:BYDylan
- * Date:2020/5/6
- * Description:使用支持多并行度的source
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 使用支持多并行度的source
  */
 object RichParalleSourceDemo {
   def main(args: Array[String]): Unit = {

@@ -4,9 +4,9 @@ import org.apache.flink.streaming.api.functions.source.ParallelSourceFunction
 import org.apache.flink.streaming.api.functions.source.SourceFunction.SourceContext
 
 /**
- * Author:BYDylan
- * Date:2020/5/6
- * Description:创建支持多并行度的自定义source
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 创建支持多并行度的自定义source
  */
 class ParalleSource extends ParallelSourceFunction[Long] {
   var count = 1L

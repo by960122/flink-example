@@ -12,9 +12,9 @@ import table.TimeAndWindowDemo.WordWithCount
 
 
 /**
- * Author:BYDylan
- * Date:2021/11/1
- * Description:
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description:
  */
 object ScalarFunctionDemo {
   def main(args: Array[String]) {

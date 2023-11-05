@@ -4,9 +4,9 @@ import org.apache.flink.api.common.functions.FilterFunction
 import source.SensorReading
 
 /**
- * Author:BYDylan
- * Date:2020/11/6
- * Description: 自定义 Filter
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 自定义 Filter
  */
 class SensorReadingFilter extends FilterFunction[SensorReading] {
   override def filter(value: SensorReading): Boolean =

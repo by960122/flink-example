@@ -13,9 +13,9 @@ import org.elasticsearch.client.Requests
 import source.SensorReading
 
 /**
- * Author:BYDylan
- * Date:2020/11/6
- * Description: 输出到 ES
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 输出到 ES
  */
 object EsSinkDemo {
   private val projectPath: String = System.getProperty("user.dir")

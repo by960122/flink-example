@@ -10,9 +10,9 @@ import table.TableFromFileDemo.projectPath
 import java.io.File
 
 /**
- * Author:BYDylan
- * Date:2021/10/27
- * Description:
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description:
  */
 object TableToFile {
   private val projectPath: String = System.getProperty("user.dir")

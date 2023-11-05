@@ -8,9 +8,9 @@ import org.apache.flink.table.descriptors.{Csv, FileSystem, Schema}
 import java.io.File
 
 /**
- * Author:BYDylan
- * Date:2021/7/24
- * Description: 从文件中 定义表
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 从文件中 定义表
  */
 object TableFromFileDemo {
   private val projectPath: String = System.getProperty("user.dir")

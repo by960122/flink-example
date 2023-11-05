@@ -10,9 +10,9 @@ import org.slf4j.{Logger, LoggerFactory}
 import java.io.File
 
 /**
- * Author:BYDylan
- * Date:2021/7/24
- * Description: Table api 基本使用
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: Table api 基本使用
  */
 object TableFromDataStreamDemo {
   private val projectPath: String = System.getProperty("user.dir")

@@ -5,9 +5,9 @@ import org.apache.flink.api.scala._
 import scala.collection.mutable.ListBuffer
 
 /**
- * Author:BYDylan
- * Date:2020/5/7
- * Description: inner join操作
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: inner join操作
  */
 object InnerJoinDemo {
   def main(args: Array[String]): Unit = {

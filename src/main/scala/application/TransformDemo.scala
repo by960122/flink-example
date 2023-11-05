@@ -9,11 +9,10 @@ import source.SensorReading
 
 
 /**
- * Author:BYDylan
- * Date:2020/11/6
- * Description: 算子 操作
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 算子 操作
  */
-
 object TransformDemo {
   private val projectPath: String = System.getProperty("user.dir")
   System.getProperty("log.file", "")

@@ -3,9 +3,9 @@ package operator
 import org.apache.flink.api.scala._
 
 /**
- * Author:BYDylan
- * Date:2020/5/7
- * Description:获取2个数据集的笛卡尔积
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 获取2个数据集的笛卡尔积
  */
 object CrossJoinDemo {
   def main(args: Array[String]): Unit = {

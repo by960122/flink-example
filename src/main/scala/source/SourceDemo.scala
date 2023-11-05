@@ -8,9 +8,9 @@ import org.apache.flink.streaming.api.scala._
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer
 
 /**
- * Author:BYDylan
- * Date:2020/11/6
- * Description: 各种 Source
+ * @author: BYDylan
+ * @date: 2021/4/22
+ * @description: 各种 Source
  */
 
 
