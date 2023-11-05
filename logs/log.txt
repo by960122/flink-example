@@ -1,3 +1,0 @@
-2021-10-29 14:38:01 [INFO] - [table.TableFromDataStreamDemo$:34] 使用sql
-2021-10-29 14:38:06 [INFO] - [event.slf4j.Slf4jLogger:92] Slf4jLogger started
-2021-10-29 14:38:06 [INFO] - [event.slf4j.Slf4jLogger:92] Slf4jLogger started

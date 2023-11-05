@@ -21,8 +21,8 @@
         </logger>
         <Root level="INFO">
             <AppenderRef ref="Console" level="INFO"/>
-            <AppenderRef ref="LogFile" level="INFO"/>
-            <AppenderRef ref="RollingFile" level="INFO"/>
+            <!--            <AppenderRef ref="LogFile" level="INFO"/>-->
+            <!--            <AppenderRef ref="RollingFile" level="INFO"/>-->
         </Root>
     </Loggers>
 </Configuration>
